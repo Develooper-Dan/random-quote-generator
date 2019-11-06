@@ -1,6 +1,6 @@
 
 /* This is the array containing the quote objects, consisting of the quote itself,
-the source plus citation and year if available.
+the source, one or more tags plus citation and year if available.
 */
 var quotes = [
   { quote: 'No man is rich enough to buy back his past.',
