@@ -36,10 +36,18 @@ var quotes = [
 ];
 
 var callingFirstTime = true;
+// setting a 20sec interval after which printQuote will be automatically executed
+var intervalID = window.setInterval(printQuote, 20000);
+
+// as you could guess, restarts the set interval upon calling (triggered by cliking the button)
+function resetTimer(){
+  clearInterval(intervalID);
+  intervalID = window.setInterval(printQuote, 20000);
+}
 
 // This function randomly returns a value between 0 and the highest index of the quotes array
 function getRandomQuote() {
-  var index = Math.ceil(Math.random() * (quotes.length - 1));
+  var index = Math.floor(Math.random() * quotes.length);
   return quotes[index];
 }
 
@@ -48,7 +56,7 @@ function randomColor() {
   if (callingFirstTime==false){
     var rgb ="rgb(";
       for (i=1; i<=3; i++){
-      rgb += Math.ceil(Math.random() * 255);
+      rgb += Math.floor(Math.random() * 256);
         if (i<3){
         rgb += ', '
       }
@@ -97,14 +105,12 @@ function printQuote() {
 // calling the printQuote function once when loading the page so it isn't "empty"
 printQuote();
 
-var callingFirstTime = false;
-
-// setting a 20sec interval after which printQuote will be automatically executed
-var intervalID = window.setInterval(printQuote, 20000);
+callingFirstTime = false;
 
 /*
 Kindly provided by Team Treehouse, this line of code turns a HTMl-object into
-a clickable button which calls the printQuote function. Great!
+a clickable button which calls the printQuote function (and now also resets the interval).
+Great!
 */
-
 document.getElementById('load-quote').addEventListener('click', printQuote, false);
+document.getElementById('load-quote').addEventListener('click', resetTimer, false);
